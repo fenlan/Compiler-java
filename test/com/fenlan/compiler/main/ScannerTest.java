@@ -5,7 +5,7 @@ import com.fenlan.compiler.token.Token;
 import com.fenlan.compiler.token.TokenTable;
 import com.fenlan.compiler.token.TokenType;
 
-public class MainTest {
+public class ScannerTest {
     public static void main(String[] args) {
         Token token;
 //        if(args.length < 2)
