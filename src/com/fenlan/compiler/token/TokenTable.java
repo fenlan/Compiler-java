@@ -1,10 +1,11 @@
 package com.fenlan.compiler.token;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TokenTable {
 
-    private static  List<Token> tokenTable;
+    public static List<Token> tokenTable = new ArrayList<>();
 
     public static void setTokenTable() {
         tokenTable.add(new Token(TokenType.CONST_ID, "PI", 3.1415926));
