@@ -3,7 +3,6 @@ package com.fenlan.compiler.scanner;
 import com.fenlan.compiler.token.Token;
 import com.fenlan.compiler.token.TokenTable;
 import com.fenlan.compiler.token.TokenType;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +11,17 @@ public class Scanner {
 
     public static int LineNo;
     private static int TOKEN_LEN = 100;
+    private static String DrawBuffer = "";       // 将DRAW(t,t)内的表达式缓存
+    public static boolean flag = false;                            // 判断是否要DRAW缓存
     private static List TokenBuffer = new ArrayList<String>();
-    public static PushbackInputStream reader = null;
-    private static int position = 0;
+    private static PushbackInputStream reader = null;
 
     public static boolean InitScanner(String fileName) {
         File srcFile = new File(fileName);
         TokenTable.setTokenTable();         // 初始化记号表(否则记号表为空)
 
         try {
-            reader = new PushbackInputStream(new FileInputStream(srcFile));
+            reader = new PushbackInputStream(new FileInputStream(srcFile), 1024);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,6 +48,7 @@ public class Scanner {
         try {
             if ((temp = reader.read()) == -1)        return 0;
             _char = (char)temp;
+            if (flag)   DrawBuffer += _char;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -196,6 +197,15 @@ public class Scanner {
         }
         token.setLexeme(listToString(TokenBuffer));
         return token;
+    }
+
+    public static void BackToken() {
+        try {
+            reader.unread(DrawBuffer.getBytes());
+            DrawBuffer = "";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String listToString(List list) {
