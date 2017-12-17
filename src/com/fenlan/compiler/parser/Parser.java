@@ -2,7 +2,6 @@ package com.fenlan.compiler.parser;
 
 import com.fenlan.compiler.main.Main;
 import com.fenlan.compiler.scanner.Scanner;
-import com.fenlan.compiler.semantics.Semantics;
 import com.fenlan.compiler.token.Token;
 import com.fenlan.compiler.token.TokenType;
 
@@ -11,7 +10,7 @@ import java.io.IOException;
 public class Parser {
 
     private static Token token;
-    public static double	Parameter=0,
+    private static double	Parameter=0,
                             Origin_x=0,Origin_y=0,
                             Scale_x=1,	Scale_y=1,
                             Rot_angle=0;
@@ -40,13 +39,14 @@ public class Parser {
         System.exit(1);
     }
 
-    public static void Parser(String FileName) {
+    public static void ParserAn(String FileName) {
         if(!Scanner.InitScanner(FileName))
         {
             System.out.println("Open Source File Error !");
             return;
         }
         FetchToken();
+        System.out.println("Parser");
         Program();
         Scanner.CloseScanner();
     }
@@ -60,6 +60,7 @@ public class Parser {
     }
 
     private static void Statement(){
+        // System.out.println("Entering Statement");
         switch(token.getType())
         {
             case TokenType.ORIGIN:	OriginStatement();break;
@@ -68,6 +69,7 @@ public class Parser {
             case TokenType.FOR:		ForStatement();break;
             default :		SyntaxError(2);
         }
+        // System.out.println("Exited Statement");
     }
 
     private static void OriginStatement() {
@@ -108,10 +110,10 @@ public class Parser {
         end = Expression(false);
         MatchToken(TokenType.STEP);
         step = Expression(false);
+        Scanner.flag = true;
         MatchToken(TokenType.DRAW);
-        for(Parser.Parameter = start; Parser.Parameter <= end; Parser.Parameter += step)
+        for(Parameter = start; Parameter <= end; Parameter += step)
         {
-            Scanner.reader.mark(10);
             MatchToken(TokenType.L_BRACKET);
             x_ptr = Expression(false);
             MatchToken(TokenType.COMMA);
@@ -120,12 +122,12 @@ public class Parser {
             tuple = CalcCoord(x_ptr, y_ptr);
             x = tuple[0];   y = tuple[1];
             Main.graphics.drawOval((int)x, (int)y, 2, 2);
-            try {
-                Scanner.reader.reset();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (Parameter+step < end) {
+                Scanner.BackToken();
+                token = Scanner.GetToken();
             }
         }
+        Scanner.flag = false;
     }
 
     private static double Expression(boolean get) {
@@ -181,7 +183,7 @@ public class Parser {
     private static double Atom(boolean get) {
         if (get)    FetchToken();
 
-        double address = 0, tmp = 0;
+        double address = 0, tmp;
         switch(token.getType())
         {
             case TokenType.CONST_ID:
@@ -193,17 +195,44 @@ public class Parser {
                 MatchToken(TokenType.T);
                 break;
             case TokenType.FUNC:
-                MatchToken(TokenType.FUNC);
-                MatchToken(TokenType.L_BRACKET);
-                tmp = Expression(false);
-                MatchToken(TokenType.R_BRACKET);
                 switch (token.getLexeme()) {
-                    case "SIN" :    address = Math.sin(tmp); break;
-                    case "COS" :    address = Math.cos(tmp); break;
-                    case "TAN" :    address = Math.tan(tmp); break;
-                    case "LN"  :    address = Math.log(tmp); break;
-                    case "EXP" :    address = Math.exp(tmp); break;
-                    case "SQRT":    address = Math.sqrt(tmp); break;
+                    case "SIN" :    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.sin(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+                                    break;
+                    case "COS" :    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.cos(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+
+                                    break;
+                    case "TAN" :    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.tan(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+                                    break;
+                    case "LN"  :    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.log(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+                                    break;
+                    case "EXP" :    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.exp(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+                                    break;
+                    case "SQRT":    MatchToken(TokenType.FUNC);
+                                    MatchToken(TokenType.L_BRACKET);
+                                    tmp = Expression(false);
+                                    address = Math.sqrt(tmp);
+                                    MatchToken(TokenType.R_BRACKET);
+                                    break;
                     default:        address = 0;
                 }
                 break;
