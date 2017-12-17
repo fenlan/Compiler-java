@@ -13,7 +13,8 @@ public class Scanner {
     public static int LineNo;
     private static int TOKEN_LEN = 100;
     private static List TokenBuffer = new ArrayList<String>();
-    private static PushbackInputStream reader = null;
+    public static PushbackInputStream reader = null;
+    private static int position = 0;
 
     public static boolean InitScanner(String fileName) {
         File srcFile = new File(fileName);
