@@ -1,13 +1,17 @@
 package com.fenlan.compiler.parser;
 
+import com.fenlan.compiler.main.Main;
 import com.fenlan.compiler.scanner.Scanner;
+import com.fenlan.compiler.semantics.Semantics;
 import com.fenlan.compiler.token.Token;
 import com.fenlan.compiler.token.TokenType;
+
+import java.io.IOException;
 
 public class Parser {
 
     private static Token token;
-    private static double	Parameter=0,
+    public static double	Parameter=0,
                             Origin_x=0,Origin_y=0,
                             Scale_x=1,	Scale_y=1,
                             Rot_angle=0;
@@ -33,10 +37,10 @@ public class Parser {
     private static void ErrMsg(int LineNo, String descrip, String string) {
         System.out.println("Line No " + LineNo + ": " + descrip + " " + string);
         Scanner.CloseScanner();
-        System.exit(0);
+        System.exit(1);
     }
 
-    private void Parser(String FileName) {
+    public static void Parser(String FileName) {
         if(!Scanner.InitScanner(FileName))
         {
             System.out.println("Open Source File Error !");
@@ -70,68 +74,177 @@ public class Parser {
         MatchToken(TokenType.ORIGIN);
         MatchToken(TokenType.IS);
         MatchToken(TokenType.L_BRACKET);
-        Origin_x  = Expression();
+        Origin_x  = Expression(false);
         MatchToken(TokenType.COMMA);
-        Origin_y = Expression();
+        Origin_y = Expression(false);
         MatchToken(TokenType.R_BRACKET);
     }
 
     private static void RotStatement() {
         MatchToken(TokenType.ROT);
         MatchToken(TokenType.IS);
-        Rot_angle = Expression();
+        Rot_angle = Expression(false);
     }
 
     private static void ScaleStatement() {
         MatchToken(TokenType.SCALE);
         MatchToken(TokenType.IS);
         MatchToken(TokenType.L_BRACKET);
-        Scale_x = Expression();
+        Scale_x = Expression(false);
         MatchToken(TokenType.COMMA);
-        Scale_y = Expression();
+        Scale_y = Expression(false);
         MatchToken(TokenType.R_BRACKET);
     }
 
     private static void ForStatement() {
+        double[] tuple;
+        double x, y;
         double start, end, step, x_ptr, y_ptr;
         MatchToken(TokenType.FOR);
         MatchToken(TokenType.T);
         MatchToken(TokenType.FROM);
-        start = Expression();
+        start = Expression(false);
         MatchToken(TokenType.TO);
-        end = Expression();
+        end = Expression(false);
         MatchToken(TokenType.STEP);
-        step = Expression();
+        step = Expression(false);
         MatchToken(TokenType.DRAW);
-        MatchToken(TokenType.L_BRACKET);
-        x_ptr = Expression();
-        MatchToken(TokenType.COMMA);
-        y_ptr = Expression();
-        MatchToken(TokenType.R_BRACKET);
-        DrawLoop(start, end, step, x_ptr, y_ptr);
+        for(Parser.Parameter = start; Parser.Parameter <= end; Parser.Parameter += step)
+        {
+            Scanner.reader.mark(10);
+            MatchToken(TokenType.L_BRACKET);
+            x_ptr = Expression(false);
+            MatchToken(TokenType.COMMA);
+            y_ptr = Expression(false);
+            MatchToken(TokenType.R_BRACKET);
+            tuple = CalcCoord(x_ptr, y_ptr);
+            x = tuple[0];   y = tuple[1];
+            Main.graphics.drawOval((int)x, (int)y, 2, 2);
+            try {
+                Scanner.reader.reset();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private static double Expression() {
-        
+    private static double Expression(boolean get) {
+        double left = Term(get);
+
+        while (true) {
+            switch (token.getType()) {
+                case TokenType.PLUS:
+                    left += Term(true);
+                    break;
+                case TokenType.MINUS:
+                    left -= Term(true);
+                    break;
+                default:
+                    return left;
+            }
+        }
     }
 
-    private static double Term() {
+    private static double Term(boolean get) {
+        double left = Component(get);
 
+        while (true) {
+            switch (token.getType()) {
+                case TokenType.MUL:
+                    left *= Component(true);
+                    break;
+                case TokenType.DIV:
+                    double tmp = Component(true);
+                    if (tmp != 0.0) {
+                        left /= tmp;
+                        break;
+                    }
+                    ErrMsg(Scanner.LineNo, "0 can not DIV", String.valueOf(tmp));
+                default:
+                    return left;
+            }
+        }
     }
 
-    private static double Factor() {
-
+    private static double Component(boolean get) {
+        double left, right;
+        left = Atom(get);
+        if(token.getType() == TokenType.POWER)
+        {
+            MatchToken(TokenType.POWER);
+            right = Component(false);
+            left = Math.pow(left, right);
+        }
+        return left;
     }
 
-    private static double Component() {
+    private static double Atom(boolean get) {
+        if (get)    FetchToken();
 
+        double address = 0, tmp = 0;
+        switch(token.getType())
+        {
+            case TokenType.CONST_ID:
+                address = token.getValue();
+                MatchToken(TokenType.CONST_ID);
+                break;
+            case TokenType.T:
+                address = Parameter;
+                MatchToken(TokenType.T);
+                break;
+            case TokenType.FUNC:
+                MatchToken(TokenType.FUNC);
+                MatchToken(TokenType.L_BRACKET);
+                tmp = Expression(false);
+                MatchToken(TokenType.R_BRACKET);
+                switch (token.getLexeme()) {
+                    case "SIN" :    address = Math.sin(tmp); break;
+                    case "COS" :    address = Math.cos(tmp); break;
+                    case "TAN" :    address = Math.tan(tmp); break;
+                    case "LN"  :    address = Math.log(tmp); break;
+                    case "EXP" :    address = Math.exp(tmp); break;
+                    case "SQRT":    address = Math.sqrt(tmp); break;
+                    default:        address = 0;
+                }
+                break;
+            case TokenType.L_BRACKET:
+                MatchToken(TokenType.L_BRACKET);
+                address = Expression(false);
+                MatchToken(TokenType.R_BRACKET);
+                break;
+            default:
+                SyntaxError(2);
+        }
+        return address;
     }
 
-    private static double Atom() {
-
+    public static void DrawLoop(double start, double end, double step, double HorPtr, double VerPtr) {
+        double[] tuple;
+        double x, y;
+        for(Parser.Parameter = start; Parser.Parameter <= end; Parser.Parameter += step)
+        {
+            tuple = CalcCoord(HorPtr, VerPtr);
+            x = tuple[0];   y = tuple[1];
+            Main.graphics.drawOval((int)x, (int)y, 2, 2);
+        }
+        System.out.println("Drawing.....");
     }
 
-    private static void DrawLoop(double start, double end, double step, double HorPtr, double VerPtr) {
+    private static double[] CalcCoord(double Hor_Exp, double Ver_Exp) {
+        double[] tuple = new double[2];
+        double HorCord, VerCord, Hor_tmp;
+        HorCord = Hor_Exp;
+        VerCord = Ver_Exp;
+        HorCord *= Parser.Scale_x;
+        VerCord *= Parser.Scale_y;
+        Hor_tmp = HorCord * Math.cos(Parser.Rot_angle) + VerCord * Math.sin(Parser.Rot_angle);
+        VerCord = VerCord * Math.cos(Parser.Rot_angle) - HorCord * Math.sin(Parser.Rot_angle);
+        HorCord = Hor_tmp;
+        HorCord += Parser.Origin_x;
+        VerCord += Parser.Origin_y;
+        tuple[0] = HorCord;
+        tuple[1] = VerCord;
 
+        return tuple;
     }
 }
