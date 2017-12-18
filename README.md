@@ -22,9 +22,8 @@ SCALE IS (100,100/3);
 FOR T FROM 0 TO 2*PI STEP PI/50 DRAW (COS(T), SIN(T));
 ```
 ### 绘图结果:
-<p align=center>
-![](https://github.com/fenlan/Mycode/blob/master/images/program1.png)
-</p>
+<images src="https://github.com/fenlan/Mycode/blob/master/images/program1.png" align=center>
+</images>
 
 ### 源程序二:
 ``` bash
@@ -42,9 +41,8 @@ SCALE IS (20,0.1);
 FOR T FROM 0 TO 8 STEP 0.1 DRAW(T,-EXP(T));
 ```
 ### 绘图结果
-<p align=center>
-![](https://github.com/fenlan/Mycode/blob/master/images/program2.png)
-</p>
+<images src="https://github.com/fenlan/Mycode/blob/master/images/program2.png" align=center>
+</images>
 
 ## c实现源码地址
 [https://github.com/fenlan/Compiler](https://github.com/fenlan/Compiler)
