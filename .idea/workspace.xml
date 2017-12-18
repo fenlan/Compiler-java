@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8235b755-00cc-4a3c-939b-adb1f67b425e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/semantics/Semantics.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/tree/Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/test/compiler/com/fenlan/compiler/main/ParserTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/fenlan/compiler/semantics/Semantics.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/fenlan/compiler/tree/Node.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/com/fenlan/compiler/main/ParserTest.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/fenlan/compiler/program/program" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/fenlan/compiler/program/program1" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/main/Main.class" afterPath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/main/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/parser/Parser.class" afterPath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/parser/Parser.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/scanner/Scanner.class" afterPath="$PROJECT_DIR$/out/production/compiler/com/fenlan/compiler/scanner/Scanner.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/compiler/com/fenlan/compiler/main/ScannerTest.class" afterPath="$PROJECT_DIR$/out/test/compiler/com/fenlan/compiler/main/ScannerTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java" afterPath="$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java" afterPath="$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java" afterPath="$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java" afterPath="$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="Scanner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3528">
-              <caret line="203" column="49" lean-forward="false" selection-start-line="203" selection-start-column="49" selection-end-line="203" selection-end-column="49" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,11 +39,10 @@
       <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2052">
-              <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+            <state relative-caret-position="2160">
+              <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
                 <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
               </folding>
             </state>
@@ -55,8 +52,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="198">
+              <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,7 +77,10 @@
       <find>exit</find>
       <find>Parameter</find>
       <find>BackChar</find>
+      <find>SyntaxError(1);</find>
+      <find>FetchToken</find>
       <find>SyntaxError(2)</find>
+      <find>graphics</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,13 +97,13 @@
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/token/Token.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/token/TokenType.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/token/TokenTable.java" />
-        <option value="$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java" />
         <option value="$PROJECT_DIR$/test/com/fenlan/compiler/main/MainTest.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/tree/Node.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/semantics/Semantics.java" />
-        <option value="$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java" />
         <option value="$PROJECT_DIR$/test/com/fenlan/compiler/main/ParserTest.java" />
+        <option value="$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java" />
+        <option value="$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java" />
         <option value="$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java" />
       </list>
     </option>
@@ -136,6 +136,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,6 +160,13 @@
             <path>
               <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="program" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -173,9 +183,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -196,6 +203,9 @@
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/fenlan/compiler/program" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -400,11 +410,19 @@
       <workItem from="1513508065507" duration="19813000" />
       <workItem from="1513529023898" duration="1548000" />
       <workItem from="1513530590162" duration="26000" />
+      <workItem from="1513530952826" duration="2712000" />
+      <workItem from="1513565795722" duration="6730000" />
+      <workItem from="1513575472862" duration="41000" />
+      <workItem from="1513580769745" duration="1591000" />
+      <workItem from="1513591745570" duration="2114000" />
+      <workItem from="1513595282329" duration="4584000" />
+      <workItem from="1513600471027" duration="632000" />
+      <workItem from="1513602904446" duration="1443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75587000" />
+    <option name="totallyTimeSpent" value="95434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1602" height="912" extended-state="6" />
@@ -415,8 +433,8 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957393" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957393" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -424,8 +442,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -445,6 +463,140 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="71" lean-forward="false" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
+          <folding>
+            <marker date="1513604289579" expanded="true" signature="616:879" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2718">
+          <caret line="151" column="9" lean-forward="false" selection-start-line="151" selection-start-column="9" selection-end-line="151" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="936">
+          <caret line="57" column="10" lean-forward="false" selection-start-line="57" selection-start-column="10" selection-end-line="57" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="71" lean-forward="true" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
+          <folding>
+            <marker date="1513604289579" expanded="true" signature="616:879" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2718">
+          <caret line="151" column="9" lean-forward="true" selection-start-line="151" selection-start-column="9" selection-end-line="151" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3636">
+          <caret line="209" column="43" lean-forward="false" selection-start-line="209" selection-start-column="43" selection-end-line="209" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3978">
+          <caret line="231" column="28" lean-forward="false" selection-start-line="231" selection-start-column="28" selection-end-line="231" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3528">
+          <caret line="203" column="49" lean-forward="false" selection-start-line="203" selection-start-column="49" selection-end-line="203" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3528">
@@ -461,7 +613,6 @@
           <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
           </folding>
         </state>
@@ -493,7 +644,6 @@
           <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
           </folding>
         </state>
@@ -525,7 +675,6 @@
           <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
           </folding>
         </state>
@@ -558,7 +707,7 @@
         <state relative-caret-position="198">
           <caret line="14" column="72" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="72" />
           <folding>
-            <marker date="1513475225003" expanded="true" signature="742:1005" ph="..." />
+            <marker date="1513604289579" expanded="true" signature="616:879" ph="..." />
           </folding>
         </state>
       </provider>
@@ -580,7 +729,6 @@
           <caret line="200" column="52" lean-forward="false" selection-start-line="200" selection-start-column="52" selection-end-line="200" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
           </folding>
         </state>
@@ -612,7 +760,6 @@
           <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
           </folding>
         </state>
@@ -689,45 +836,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3528">
-          <caret line="203" column="49" lean-forward="false" selection-start-line="203" selection-start-column="49" selection-end-line="203" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/tree/Node.java" />
-    <entry file="file://$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-          <folding>
-            <marker date="1513475225003" expanded="true" signature="742:1005" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/semantics/Semantics.java" />
     <entry file="file://$PROJECT_DIR$/test/com/fenlan/compiler/main/ParserTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/scanner/Scanner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2052">
-          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SyntaxError#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2160">
+          <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#ErrMsg#0;class#Parser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/program/program">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/program/program1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/fenlan/compiler/main/ScannerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="74" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="74" />
+          <folding>
+            <marker date="1513604289579" expanded="true" signature="616:879" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fenlan/compiler/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        <state relative-caret-position="198">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
