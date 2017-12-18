@@ -11,7 +11,7 @@ public class Scanner {
 
     public static int LineNo;
     private static int TOKEN_LEN = 100;
-    private static String DrawBuffer = "";       // 将DRAW(t,t)内的表达式缓存
+    public static String DrawBuffer = "";                       // 将DRAW(t,t)内的表达式缓存
     public static boolean flag = false;                            // 判断是否要DRAW缓存
     private static List TokenBuffer = new ArrayList<String>();
     private static PushbackInputStream reader = null;
@@ -43,8 +43,8 @@ public class Scanner {
     }
 
     private static char GetChar() {
-        int temp = 0;
-        char _char = '0';
+        int temp;
+        char _char = 0;
         try {
             if ((temp = reader.read()) == -1)        return 0;
             _char = (char)temp;
@@ -56,9 +56,14 @@ public class Scanner {
     }
 
     private static void BackChar(char _char) {
+        int index = 0;
         if (_char != 0) {
             try {
                 reader.unread(_char);
+                if (flag) {
+                    index = DrawBuffer.length();
+                    DrawBuffer = DrawBuffer.substring(0, index-1);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -199,7 +204,7 @@ public class Scanner {
         return token;
     }
 
-    public static void BackToken() {
+    public static void BackToken() {                // 识别ForStatement时，需要将DRAW(T, T)的记号退回
         try {
             reader.unread(DrawBuffer.getBytes());
             DrawBuffer = "";
