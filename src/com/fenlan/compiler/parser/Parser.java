@@ -1,15 +1,15 @@
 package com.fenlan.compiler.parser;
 
-import com.fenlan.compiler.main.Main;
 import com.fenlan.compiler.scanner.Scanner;
 import com.fenlan.compiler.token.Token;
 import com.fenlan.compiler.token.TokenType;
-
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
 
     private static Token token;
+    public static List<double[]> list = new ArrayList<>();
     private static double	Parameter=0,
                             Origin_x=0,Origin_y=0,
                             Scale_x=1,	Scale_y=1,
@@ -46,7 +46,6 @@ public class Parser {
             return;
         }
         FetchToken();
-        System.out.println("Parser");
         Program();
         Scanner.CloseScanner();
     }
@@ -60,7 +59,6 @@ public class Parser {
     }
 
     private static void Statement(){
-        // System.out.println("Entering Statement");
         switch(token.getType())
         {
             case TokenType.ORIGIN:	OriginStatement();break;
@@ -69,77 +67,78 @@ public class Parser {
             case TokenType.FOR:		ForStatement();break;
             default :		SyntaxError(2);
         }
-        // System.out.println("Exited Statement");
     }
 
     private static void OriginStatement() {
         MatchToken(TokenType.ORIGIN);
         MatchToken(TokenType.IS);
         MatchToken(TokenType.L_BRACKET);
-        Origin_x  = Expression(false);
+        Origin_x  = Expression();
         MatchToken(TokenType.COMMA);
-        Origin_y = Expression(false);
+        Origin_y = Expression();
         MatchToken(TokenType.R_BRACKET);
     }
 
     private static void RotStatement() {
         MatchToken(TokenType.ROT);
         MatchToken(TokenType.IS);
-        Rot_angle = Expression(false);
+        Rot_angle = Expression();
     }
 
     private static void ScaleStatement() {
         MatchToken(TokenType.SCALE);
         MatchToken(TokenType.IS);
         MatchToken(TokenType.L_BRACKET);
-        Scale_x = Expression(false);
+        Scale_x = Expression();
         MatchToken(TokenType.COMMA);
-        Scale_y = Expression(false);
+        Scale_y = Expression();
         MatchToken(TokenType.R_BRACKET);
     }
 
     private static void ForStatement() {
         double[] tuple;
-        double x, y;
         double start, end, step, x_ptr, y_ptr;
         MatchToken(TokenType.FOR);
         MatchToken(TokenType.T);
         MatchToken(TokenType.FROM);
-        start = Expression(false);
+        start = Expression();
         MatchToken(TokenType.TO);
-        end = Expression(false);
+        end = Expression();
         MatchToken(TokenType.STEP);
-        step = Expression(false);
-        Scanner.flag = true;
+        step = Expression();
+        Scanner.flag = true;            // 开始缓冲DRAW里面的记号
         MatchToken(TokenType.DRAW);
         for(Parameter = start; Parameter <= end; Parameter += step)
         {
             MatchToken(TokenType.L_BRACKET);
-            x_ptr = Expression(false);
+            x_ptr = Expression();
             MatchToken(TokenType.COMMA);
-            y_ptr = Expression(false);
+            y_ptr = Expression();
             MatchToken(TokenType.R_BRACKET);
             tuple = CalcCoord(x_ptr, y_ptr);
-            x = tuple[0];   y = tuple[1];
-            Main.graphics.drawOval((int)x, (int)y, 2, 2);
-            if (Parameter+step < end) {
+            list.add(tuple);
+            if (Parameter+step <= end) {
                 Scanner.BackToken();
                 token = Scanner.GetToken();
             }
         }
-        Scanner.flag = false;
+        Scanner.DrawBuffer = "";        // 将DRAW缓冲记号清空
+        Scanner.flag = false;           // 结束DRAW缓冲记号
+        Parameter = 0;                  // 将参数T的值重置0
     }
 
-    private static double Expression(boolean get) {
-        double left = Term(get);
+    private static double Expression() {
+        double left = Term();
 
         while (true) {
             switch (token.getType()) {
                 case TokenType.PLUS:
-                    left += Term(true);
+                    MatchToken(token.getType());
+                    left += Term();
                     break;
                 case TokenType.MINUS:
-                    left -= Term(true);
+                    MatchToken(token.getType());
+                    left -= Term();
                     break;
                 default:
                     return left;
@@ -147,16 +146,18 @@ public class Parser {
         }
     }
 
-    private static double Term(boolean get) {
-        double left = Component(get);
+    private static double Term() {
+        double left = Factor();
 
         while (true) {
             switch (token.getType()) {
                 case TokenType.MUL:
-                    left *= Component(true);
+                    MatchToken(token.getType());
+                    left *= Factor();
                     break;
                 case TokenType.DIV:
-                    double tmp = Component(true);
+                    MatchToken(token.getType());
+                    double tmp = Factor();
                     if (tmp != 0.0) {
                         left /= tmp;
                         break;
@@ -168,21 +169,36 @@ public class Parser {
         }
     }
 
-    private static double Component(boolean get) {
+    private static double Factor() {
+        double right;
+        if (token.getType() == TokenType.PLUS)
+        {
+            MatchToken(TokenType.PLUS);
+            right = Factor();
+        }
+        else if (token.getType() == TokenType.MINUS)
+        {
+            MatchToken(TokenType.MINUS);
+            right = Factor();
+            right = 0 - right;
+        }
+        else right = Component();
+        return right;
+    }
+
+    private static double Component() {
         double left, right;
-        left = Atom(get);
+        left = Atom();
         if(token.getType() == TokenType.POWER)
         {
             MatchToken(TokenType.POWER);
-            right = Component(false);
+            right = Component();
             left = Math.pow(left, right);
         }
         return left;
     }
 
-    private static double Atom(boolean get) {
-        if (get)    FetchToken();
-
+    private static double Atom() {
         double address = 0, tmp;
         switch(token.getType())
         {
@@ -198,38 +214,38 @@ public class Parser {
                 switch (token.getLexeme()) {
                     case "SIN" :    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.sin(tmp);
                                     MatchToken(TokenType.R_BRACKET);
                                     break;
                     case "COS" :    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.cos(tmp);
                                     MatchToken(TokenType.R_BRACKET);
 
                                     break;
                     case "TAN" :    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.tan(tmp);
                                     MatchToken(TokenType.R_BRACKET);
                                     break;
                     case "LN"  :    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.log(tmp);
                                     MatchToken(TokenType.R_BRACKET);
                                     break;
                     case "EXP" :    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.exp(tmp);
                                     MatchToken(TokenType.R_BRACKET);
                                     break;
                     case "SQRT":    MatchToken(TokenType.FUNC);
                                     MatchToken(TokenType.L_BRACKET);
-                                    tmp = Expression(false);
+                                    tmp = Expression();
                                     address = Math.sqrt(tmp);
                                     MatchToken(TokenType.R_BRACKET);
                                     break;
@@ -238,25 +254,13 @@ public class Parser {
                 break;
             case TokenType.L_BRACKET:
                 MatchToken(TokenType.L_BRACKET);
-                address = Expression(false);
+                address = Expression();
                 MatchToken(TokenType.R_BRACKET);
                 break;
             default:
                 SyntaxError(2);
         }
         return address;
-    }
-
-    public static void DrawLoop(double start, double end, double step, double HorPtr, double VerPtr) {
-        double[] tuple;
-        double x, y;
-        for(Parser.Parameter = start; Parser.Parameter <= end; Parser.Parameter += step)
-        {
-            tuple = CalcCoord(HorPtr, VerPtr);
-            x = tuple[0];   y = tuple[1];
-            Main.graphics.drawOval((int)x, (int)y, 2, 2);
-        }
-        System.out.println("Drawing.....");
     }
 
     private static double[] CalcCoord(double Hor_Exp, double Ver_Exp) {
