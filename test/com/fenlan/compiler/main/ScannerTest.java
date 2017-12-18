@@ -8,11 +8,7 @@ import com.fenlan.compiler.token.TokenType;
 public class ScannerTest {
     public static void main(String[] args) {
         Token token;
-//        if(args.length < 2)
-//        {
-//            System.out.println("please input Source File !");		return ;
-//        }
-        if(!Scanner.InitScanner("/home/fenlan/code/cpp/compiler/program"))
+        if(!Scanner.InitScanner("src/com/fenlan/compiler/program/program1"))
         {
             System.out.println("Open Source File Error!");
         }
