@@ -1,2 +1,5 @@
 language: java
 script: true
+
+after_success:
+    coveralls
