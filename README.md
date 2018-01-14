@@ -1,9 +1,11 @@
 # <p align='center'>简易解释器</p>
 
 <div align="center">
+
 ![build status](https://travis-ci.org/fenlan/Compiler-java.svg?branch=master)
 ![language](https://img.shields.io/badge/language-java-brightgreen.svg)
 ![platform](https://img.shields.io/badge/platform-Linux|Windows|MacOS-brightgreen.svg)
+
 </div>
 
 ## 简单介绍
