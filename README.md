@@ -1,8 +1,10 @@
 # <p align='center'>简易解释器</p>
 
+<p align="center">
 ![build status](https://travis-ci.org/fenlan/Compiler-java.svg?branch=master)
 ![language](https://img.shields.io/badge/language-java-brightgreen.svg)
 ![platform](https://img.shields.io/badge/platform-Linux|Windows|MacOS-brightgreen.svg)
+</p>
 
 ## 简单介绍
 程序为实现一个简单的函数绘图语言的解释器,该解释器接受用绘图语言编写的源程序,经过语法和语义分析之后,直接将源程序所规定的图形显示在显示屏(或显示窗口)中。
