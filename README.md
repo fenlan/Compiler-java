@@ -4,6 +4,7 @@
 
 ![build status](https://travis-ci.org/fenlan/Compiler-java.svg?branch=master)
 [![codebeat badge](https://codebeat.co/badges/5741713e-abf6-4963-978e-4787cf725b49)](https://codebeat.co/projects/github-com-fenlan-compiler-java-master)
+![size](https://github-size-badge.herokuapp.com/fenlan/Compiler-java.svg)
 ![language](https://img.shields.io/badge/language-java-blue.svg)
 ![platform](https://img.shields.io/badge/platform-Linux-orange.svg)
 
