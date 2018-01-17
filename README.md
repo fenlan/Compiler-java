@@ -4,7 +4,7 @@
 
 ![build status](https://travis-ci.org/fenlan/Compiler-java.svg?branch=master)
 ![language](https://img.shields.io/badge/language-java-brightgreen.svg)
-![platform](https://img.shields.io/badge/platform-Linux|Windows|MacOS-brightgreen.svg)
+![platform](https://img.shields.io/badge/platform-Linux-brightgreen.svg)
 
 </div>
 
